@@ -2,12 +2,15 @@ import { createContext, useContext, useState, useCallback } from 'react'
 
 const AuthContext = createContext(null)
 
+// Decodes the JWT payload for display purposes only. Signature is NOT verified
+// here; the backend validates every authenticated request independently.
 function decodeUsername(token) {
   try {
     const payload = token.split('.')[1]
     const decoded = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')))
     return decoded.sub || decoded.username || 'User'
-  } catch {
+  } catch (e) {
+    if (import.meta.env.DEV) console.warn('JWT decode error:', e)
     return 'User'
   }
 }

@@ -48,7 +48,7 @@ export default function LoginPage() {
             className="display-lg"
             style={{ color: 'var(--color-primary)' }}
           >
-            copilot taller
+            Copilot Taller
           </span>
         </div>
 
